@@ -8,9 +8,6 @@ use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 
-//Zend\ServiceManager\Di;
-//use Zend\ServiceManager\Di;
-
 class Module implements ConfigProviderInterface
 {
     public function getConfig()
