@@ -24,6 +24,6 @@ class Post
             'id' => $this->id,
             'title' => $this->title,
             'content' => $this->content
-        ]
+        ];
     }
 }

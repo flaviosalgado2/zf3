@@ -7,3 +7,5 @@ while ($line = fread($fh, 4096)) {
 }
 
 fclose($fh);
+
+echo 'script executado com sucesso!';
