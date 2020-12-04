@@ -28,9 +28,6 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Contr
     {
         return [
             'factories' => [
-                Model\PostTable::class => PostTableFactory::class,
-                Model\PostTableGateway::class => PostTableGatewayFactory::class,
-                PostForm::class => PostFormFactory::class
             ]
         ];
     }
@@ -39,7 +36,6 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Contr
     {
         return [
             'factories' => [
-                BlogController::class => BlogControllerFactory::class
             ]
         ];
     }

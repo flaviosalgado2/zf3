@@ -79,6 +79,10 @@ class ComposerStaticInite64426d8e32d4af911063765e88ba2b6
         array (
             'Webmozart\\Assert\\' => 17,
         ),
+        'U' => 
+        array (
+            'User\\' => 5,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
@@ -293,6 +297,10 @@ class ComposerStaticInite64426d8e32d4af911063765e88ba2b6
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'User\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/module/User/src',
         ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
