@@ -87,7 +87,7 @@ class BlogController extends AbstractActionController
         $post = new Post();
         $post->exchangeArray($form->getData());
         $this->table->save($post);
-        return $this->redirect()->toRoute('post');
+        return $this->redirect()->toRoute('admin-blog/post');
 
     }
 
@@ -96,13 +96,13 @@ class BlogController extends AbstractActionController
         $id = (int)$this->params()->fromRoute('id', 0);
 
         if (!$id) {
-            return $this->redirect()->toRoute('post');
+            return $this->redirect()->toRoute('admin-blog/post');
         }
 
         try {
             $post = $this->table->find($id);
         } catch (\Exception $e) {
-            return $this->redirect()->toRoute('post');
+            return $this->redirect()->toRoute('admin-blog/post');
         }
 
         $form = $this->form;
@@ -128,7 +128,7 @@ class BlogController extends AbstractActionController
 
         $this->table->save($post);
 
-        return $this->redirect()->toRoute('post');
+        return $this->redirect()->toRoute('admin-blog/post');
 
     }
 
@@ -137,12 +137,12 @@ class BlogController extends AbstractActionController
         $id = (int)$this->params()->fromRoute('id', 0);
 
         if (!$id) {
-            return $this->redirect()->toRoute('post');
+            return $this->redirect()->toRoute('admin-blog/post');
 
         }
 
         $this->table->delete($id);
 
-        return $this->redirect()->toRoute('post');
+        return $this->redirect()->toRoute('admin-blog/post');
     }
 }

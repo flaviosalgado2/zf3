@@ -1,13 +1,38 @@
 <?php
 
-namespace Blog;
+namespace User;
 
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Zend\Router\Http\Literal;
+use User\Controller;
 
 return [
+    'router' => [
+        'routes' => [
+            'login' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/auth/login',
+                    'defaults' => [
+                        'controller' => Controller\AuthController::class,
+                        'action' => 'login',
+                    ],
+                ],
+            ],
+            'logout' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/auth/logout',
+                    'defaults' => [
+                        'controller' => Controller\AuthController::class,
+                        'action' => 'logout',
+                    ],
+                ],
+            ],
+        ],
+    ],
     'view_manager' => [
         'template_path_stack' => [
-            'blog' => __DIR__ . "/../view"
+            'user' => __DIR__ . "/../view"
         ]
     ]
 ];

@@ -14,7 +14,7 @@ $submit = $form->get('submit');
 $submit->setAttribute('class', 'btn btn-primary');
 $submit->setAttribute('value', 'Postar');
 
-$form->setAttribute('action', $this->url('post', ['action' => 'add']));
+$form->setAttribute('action', $this->url('admin-blog/post', ['action' => 'add']));
 $form->prepare();
 
 //imprime o action do form

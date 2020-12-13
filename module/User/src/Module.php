@@ -1,24 +1,19 @@
 <?php
 
-namespace Blog;
+namespace User;
 
-use Blog\Controller\BlogController;
-use Blog\Controller\Factory\BlogControllerFactory;
-use Blog\Form\PostForm;
-
-use Blog\Form\Factory\PostFormFactory;
-use Blog\Model\Factory\PostTableFactory;
-use Blog\Model\Factory\PostTableGatewayFactory;
-use Zend\Db\Adapter\AdapterInterface;
-use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\TableGateway\TableGateway;
+use User\Controller\Factory\AuthControllerFactory;
+use User\Controller\AuthController;
+use User\Service\Factory\AuthenticationServiceFactory;
+use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ControllerProviderInterface;
-use Zend\ModuleManager\Feature\SerializerProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 
 class Module implements ConfigProviderInterface, ServiceProviderInterface, ControllerProviderInterface
 {
+
     public function getConfig()
     {
         return include __DIR__ . "/../config/module.config.php";
@@ -27,7 +22,11 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Contr
     public function getServiceConfig()
     {
         return [
+            'aliases' => [
+                AuthenticationService::class => AuthenticationServiceInterface::class
+            ],
             'factories' => [
+                AuthenticationServiceInterface::class => AuthenticationServiceFactory::class
             ]
         ];
     }
@@ -36,6 +35,7 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Contr
     {
         return [
             'factories' => [
+                AuthController::class => AuthControllerFactory::class
             ]
         ];
     }
