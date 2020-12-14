@@ -3,6 +3,8 @@
 namespace Blog\Controller;
 
 use Blog\Form\CommentForm;
+use Blog\Model\Comment;
+use Blog\Model\CommentTable;
 use Blog\Model\Post;
 use Blog\Model\PostTable;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -15,9 +17,15 @@ class PostController extends AbstractActionController
      */
     private $table;
 
-    public function __construct(PostTable $table)
+    /**
+     * @var CommentTable s
+     */
+    private $commentTable;
+
+    public function __construct(PostTable $table, CommentTable $commentTable)
     {
         $this->table = $table;
+        $this->commentTable = $commentTable;
     }
 
     public function indexAction()
@@ -51,6 +59,33 @@ class PostController extends AbstractActionController
 
     public function addCommentAction()
     {
+        $id = (int)$this->params()->fromRoute('id', 0);
 
+        if (!$id) {
+            return $this->redirect()->toRoute('site-post');
+        }
+        $request = $this->getRequest();
+        if (!$request->isPost()) {
+            $this->redirect()->toRoute('site-post');
+        } else {
+            try {
+                $post = $this->table->find($id);
+            } catch (\Exception $e) {
+                return $this->redirect()->toRoute('site-post');
+            }
+
+            $commentForm = new CommentForm();
+            $commentForm->setData($request->getPost());
+            if (!$commentForm->isValid()) {
+                return $this->redirect()->toRoute('site-post', ['action' => 'show', 'id' => $post->id]);
+            }
+
+            $data = $commentForm->getData();
+            $data['post_id'] = $post->id;
+            $comment = new Comment();
+            $comment->exchangeArray($data);
+            $this->commentTable->save($comment);
+            return $this->redirect()->toRoute('site-post', ['action' => 'show', 'id' => $post->id]);
+        }
     }
 }

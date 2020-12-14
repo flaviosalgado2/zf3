@@ -4,6 +4,7 @@ namespace Blog\Controller\Factory;
 
 use Blog\Controller\PostController;
 use Blog\Form\PostForm;
+use Blog\Model\CommentTable;
 use Blog\Model\PostTable;
 use Interop\Container\ContainerInterface;
 
@@ -14,8 +15,8 @@ class PostControllerFactory
     {
         // TODO: Implement __invoke() method.
         $postTable = $container->get(PostTable::class);
-        //$postForm = $container->get(PostForm::class);
+        $commentTable = $container->get(CommentTable::class);
 
-        return new PostController($postTable);
+        return new PostController($postTable, $commentTable);
     }
 }

@@ -34,9 +34,9 @@ $commentForm->prepare();
             echo $this->form()->closeTag($commentForm); ?>
             <br><br><br>
             <ul>
-                <? foreach ($postComments as $comment): ?>
+                <?php foreach ($post->comments as $comment): ?>
                     <li><?= $this->escapehtml($comment->content) ?></li>
-                <? endforeach; ?>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>
