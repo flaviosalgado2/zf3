@@ -32,6 +32,12 @@ $commentForm->prepare();
             <?php
             echo $this->formSubmit($submit);
             echo $this->form()->closeTag($commentForm); ?>
+            <br><br><br>
+            <ul>
+                <? foreach ($postComments as $comment): ?>
+                    <li><?= $this->escapehtml($comment->content) ?></li>
+                <? endforeach; ?>
+            </ul>
         </div>
     </div>
 </div>

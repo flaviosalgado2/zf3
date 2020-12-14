@@ -9,6 +9,9 @@ use Blog\Controller\PostController;
 use Blog\Form\PostForm;
 
 use Blog\Form\Factory\PostFormFactory;
+use Blog\Model\CommentTable;
+use Blog\Model\Factory\CommentTableFactory;
+use Blog\Model\Factory\CommentTableGatewayFactory;
 use Blog\Model\Factory\PostTableFactory;
 use Blog\Model\Factory\PostTableGatewayFactory;
 use User\Controller\AuthController;
@@ -56,7 +59,9 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Contr
             'factories' => [
                 Model\PostTable::class => PostTableFactory::class,
                 Model\PostTableGateway::class => PostTableGatewayFactory::class,
-                PostForm::class => PostFormFactory::class
+                PostForm::class => PostFormFactory::class,
+                Model\CommentTableGateway::class => CommentTableGatewayFactory::class,
+                Model\CommentTable::class => CommentTableFactory::class
             ]
         ];
     }
@@ -66,7 +71,7 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Contr
         return [
             'factories' => [
                 BlogController::class => BlogControllerFactory::class,
-                PostController::class => PostControllerFactory::    class
+                PostController::class => PostControllerFactory::class
             ]
         ];
     }

@@ -2,26 +2,33 @@
 
 namespace Blog\Model;
 
-class Post
+use http\Exception\RuntimeException;
+use Zend\Db\TableGateway\TableGatewayInterface;
+
+class CommentTable
 {
-    public $id;
-    public $title;
-    public $content;
+    private $tableGateway;
 
-    public function exchangeArray(array $data)
+    public function __construct(TableGatewayInterface $tableGateway)
     {
-        $this->id = (!empty($data['id'])) ? $data['id'] : null;
-        $this->title = (!empty($data['title'])) ? $data['title'] : null;
-        $this->content = (!empty($data['content'])) ? $data['content'] : null;
-
+        $this->tableGateway = $tableGateway;
     }
 
-    public function getArrayCopy()
+    public function fetchAll($post_id)
     {
-        return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'content' => $this->content
+        return $this->tableGateway->select([
+            'post_id' => $post_id
+        ]);
+    }
+
+    public function save(Comment $comment)
+    {
+        $data = [
+            'content' => $comment->content,
+            'post_id' => $comment->post_id
         ];
+
+        $this->tableGateway->insert($data);
+        return;
     }
 }
